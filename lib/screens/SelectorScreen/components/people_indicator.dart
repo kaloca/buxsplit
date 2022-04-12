@@ -21,7 +21,14 @@ class _PeopleIndicatorState extends State<PeopleIndicator> {
                 color: Colors.white,
                 border: Border.all(color: Colors.blueAccent),
                 borderRadius: BorderRadiusDirectional.circular(10)),
-            child: const Text('test'),
+            child: Container(
+              height: 20,
+              width: 20,
+              decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(color: Colors.blueAccent),
+                  borderRadius: BorderRadiusDirectional.circular(10)),
+            ),
           ),
         ),
       ],

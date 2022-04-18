@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter/services.dart';
 
 class ScanScreen extends StatefulWidget {
@@ -34,7 +34,7 @@ class _ScanScreenState extends State<ScanScreen> {
             ),
             Container(
               margin: const EdgeInsets.only(top: 10),
-              child: ElevatedButton(
+              child: NeumorphicButton(
                 onPressed: () {
                   setState(() {
                     numberOfPeople = int.parse(numberOfPeopleController.text);

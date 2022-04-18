@@ -7,6 +7,7 @@ class Helpers {
   }
 
   static findById(list, String id) {
+    // ignore: prefer_function_declarations_over_variables
     Function findById = (obj) => obj.id == id;
     var result = list.where(findById);
     return result.length > 0 ? result.first : null;

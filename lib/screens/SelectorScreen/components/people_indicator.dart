@@ -46,6 +46,19 @@ class _PeopleIndicatorState extends State<PeopleIndicator> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
+                    Container(
+                        //alignment: Alignment.center,
+                        margin: const EdgeInsets.only(right: 8, top: 5),
+                        child: widget.people.isEmpty
+                            ? const Text(
+                                'Adicionar pessoas',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: NeumorphicColors.darkVariant,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )
+                            : null),
                     ...widget.people
                         .map((person) => IndicatorCircle(person.color,
                             person.id, widget.selectCircle, false))

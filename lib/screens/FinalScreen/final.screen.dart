@@ -42,15 +42,12 @@ class _FinalScreenState extends State<FinalScreen> {
           title: const Text('Total'),
         ),
         body: NeumorphicBackground(
-          child: SizedBox(
-            child: Container(
-              // color: Colors.blue,
-              padding: const EdgeInsets.all(15),
-              child: ListView(
-                  shrinkWrap: true,
-                  children:
-                      args.people.map((person) => TotalCost(person)).toList()),
-            ),
+          child: Container(
+            // color: Colors.blue,
+            padding: const EdgeInsets.all(15),
+            child: ListView(
+                children:
+                    args.people.map((person) => TotalCost(person)).toList()),
           ),
         ),
       ),

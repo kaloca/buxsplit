@@ -8,7 +8,7 @@ class IndicatorCircle extends StatefulWidget {
   final double price;
   final bool isInFinalScreen;
 
-  IndicatorCircle(
+  const IndicatorCircle(
       this.circleColor, this.id, this.selectCircle, this.isPartOfItem,
       {Key? key, this.price = 0, this.isInFinalScreen = false})
       : super(key: key);

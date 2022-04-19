@@ -24,7 +24,8 @@ class _ItemListState extends State<ItemList> {
 
     items = [
       Item('Temaki de Salmão', 27, widget.people, widget.selectedPeopleId,
-          calculateTotalCosts),
+          calculateTotalCosts,
+          quantity: 3),
       Item('Uramaki', 45, widget.people, widget.selectedPeopleId,
           calculateTotalCosts),
       Item('Combinado para uma pessoa', 123, widget.people,
@@ -35,15 +36,19 @@ class _ItemListState extends State<ItemList> {
   void calculateTotalCosts() {
     for (var person in widget.people) {
       person.cost = 0;
+      person.items = [];
     }
 
     for (var item in items) {
       var selectedPeople = item.indicatorCircles;
-      selectedPeople.forEach((person) {
-        widget.people.firstWhere((p) => p.id == person.id).cost += person.cost;
+      for (var person in selectedPeople) {
+        var currentPerson = widget.people.firstWhere((p) => p.id == person.id);
+        currentPerson.cost += person.cost;
+        currentPerson.items.add(SelectedItem(
+            item.name, item.price / selectedPeople.length, item.quantity));
 
         //print("Item: ${item.name}, id: ${person.id}, cost: ${person.cost}"));
-      });
+      }
       // widget.people.forEach((person) {
       //   person.cost = person.cost +
       //       selectedPeople.firstWhere((p) => p.id == person.id).cost;
@@ -55,7 +60,8 @@ class _ItemListState extends State<ItemList> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      shrinkWrap: true,
       children: [
         ...items,
         // ElevatedButton(

@@ -4,15 +4,32 @@ import 'package:buxsplit/screens/FinalScreen/final.screen.dart';
 
 import 'components/people_indicator.dart';
 import 'components/item_list.dart';
+import 'components/new_person_creator.dart';
+
+class SelectedItem {
+  final String name;
+  final double price;
+  final int quantity;
+
+  const SelectedItem(this.name, this.price, this.quantity);
+}
 
 class Person {
   final String id;
   final Color color;
   final String? name;
 
+  List<SelectedItem> items;
+
   double cost;
 
-  Person({required this.id, required this.color, this.cost = 0, this.name});
+  Person(
+      {required this.id,
+      required this.color,
+      this.cost = 0,
+      this.name,
+      List<SelectedItem>? items})
+      : items = items ?? [];
 }
 
 class SelectorScreen extends StatefulWidget {
@@ -24,19 +41,16 @@ class SelectorScreen extends StatefulWidget {
 
 class _SelectorScreenState extends State<SelectorScreen> {
   List<String> selectedCircles = [];
-  List<Person> people = [
-    Person(id: '0', color: Colors.blueGrey),
-    Person(id: '1', color: Colors.purple),
-  ];
+  List<Person> people = [];
 
   List<Color> colors = [
     Colors.blueGrey,
     Colors.purple,
     Colors.cyan,
-    Colors.amber,
-    Colors.lightGreen,
     Colors.blueAccent,
     Colors.pinkAccent,
+    Colors.indigo,
+    Colors.teal,
   ];
 
   void selectCircle(String id) {
@@ -50,7 +64,7 @@ class _SelectorScreenState extends State<SelectorScreen> {
   }
 
   void createPerson() {
-    if (people.length < 7) {
+    if (people.length < 4) {
       people.add(Person(
         id: people.length.toString(),
         color: colors[people.length],
@@ -87,6 +101,7 @@ class _SelectorScreenState extends State<SelectorScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                NewPersonCard(colors: colors),
                 PeopleIndicator(
                   selectCircle: selectCircle,
                   people: people,

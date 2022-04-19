@@ -10,6 +10,7 @@ class Item extends StatefulWidget {
   final List<Person> people;
   final List<String> selectedPeopleId;
   final Function executeWhenTapped;
+  final int quantity;
 
   List<Person> indicatorCircles = [];
 
@@ -19,7 +20,7 @@ class Item extends StatefulWidget {
 
   Item(this.name, this.price, this.people, this.selectedPeopleId,
       this.executeWhenTapped,
-      {Key? key})
+      {Key? key, this.quantity = 1})
       : super(key: key);
 
   @override
@@ -29,7 +30,8 @@ class Item extends StatefulWidget {
 class _ItemState extends State<Item> {
   void updatePricesPerItem() {
     for (var circle in widget.indicatorCircles) {
-      double currentCost = widget.price / widget.indicatorCircles.length;
+      double currentCost =
+          widget.price * widget.quantity / widget.indicatorCircles.length;
 
       circle.cost = currentCost;
       // widget.people.firstWhere((p) => p.id == circle.id).cost +=
@@ -95,25 +97,32 @@ class _ItemState extends State<Item> {
                     width: 50,
                     margin: const EdgeInsets.only(right: 10),
                     child: NeumorphicText(
-                      widget.price.toString(),
+                      (widget.price * widget.quantity).toString(),
                       style: const NeumorphicStyle(
                         color: Colors.black54,
                         depth: 0.5,
                       ),
                       textStyle: NeumorphicTextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                   SizedBox(
-                    width: 180,
+                    width: 153,
                     child: Text(
                       widget.name,
                       style: const TextStyle(
                           fontSize: 17,
-                          color: Color.fromARGB(255, 23, 23, 23),
-                          fontWeight: FontWeight.bold),
+                          color: Color.fromARGB(255, 31, 31, 31),
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 6, left: 8),
+                    width: 18,
+                    child: Text(
+                      "${widget.quantity.toString()}x",
                     ),
                   ),
                 ],
@@ -121,7 +130,7 @@ class _ItemState extends State<Item> {
               Container(
                 height: 38,
                 alignment: Alignment.center,
-                constraints: const BoxConstraints(minWidth: 40, maxWidth: 100),
+                constraints: const BoxConstraints(minWidth: 40, maxWidth: 90),
                 child: ListView(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,

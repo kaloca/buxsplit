@@ -6,11 +6,9 @@ class NewPersonCard extends StatelessWidget {
   const NewPersonCard({
     Key? key,
     required this.colors,
-    colorPickers = [],
   }) : super(key: key);
 
   final List<Color> colors;
-  List<ColorPick> colorPickers;
 
   void selectColor(List<ColorPick> list, String id) {
     List<ColorPick> copyList = [...list];
@@ -25,10 +23,8 @@ class NewPersonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    colorPickers = colors
-        .map((color) => ColorPick(color, (String id) {
-              selectColor(colorPickers, id);
-            }, color.toString()))
+    var colorPickers = colors
+        .map((color) => ColorPick(color, (String id) {}, color.toString()))
         .toList();
 
     return Stack(children: [

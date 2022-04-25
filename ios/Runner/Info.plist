@@ -43,5 +43,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Take new picture of receipt</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Choose receipt image from library</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Required for image picker plugin</string>
 </dict>
 </plist>

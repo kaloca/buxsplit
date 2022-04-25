@@ -101,7 +101,7 @@ class _SelectorScreenState extends State<SelectorScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                NewPersonCard(colors: colors),
+                // NewPersonCard(colors: colors),
                 PeopleIndicator(
                   selectCircle: selectCircle,
                   people: people,

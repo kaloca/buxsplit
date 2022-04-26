@@ -2,7 +2,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import 'package:buxsplit/screens/SelectorScreen/components/indicator_circle.dart';
 
-import '../selector_screen.dart';
+import '../types.dart';
 
 class Item extends StatefulWidget {
   final String name;

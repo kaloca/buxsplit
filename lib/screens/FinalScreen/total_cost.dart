@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-import '../SelectorScreen/selector_screen.dart';
+import '../SelectorScreen/types.dart';
 import '../SelectorScreen/components/indicator_circle.dart';
 
 final toReais = NumberFormat.simpleCurrency(locale: 'pt_BR');

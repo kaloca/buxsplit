@@ -1,6 +1,6 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-import '../selector_screen.dart';
+import '../types.dart';
 import './indicator_circle.dart';
 
 class PeopleIndicator extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:buxsplit/screens/FinalScreen/total_cost.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-import '../SelectorScreen/selector_screen.dart';
+import '../SelectorScreen/types.dart';
 
 class FinalScreenArguments {
   final List<Person> people;

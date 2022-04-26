@@ -6,30 +6,12 @@ import 'components/people_indicator.dart';
 import 'components/item_list.dart';
 import 'components/new_person_creator.dart';
 
-class SelectedItem {
-  final String name;
-  final double price;
-  final int quantity;
+import './types.dart';
 
-  const SelectedItem(this.name, this.price, this.quantity);
-}
+class SelectorScreenArguments {
+  var items;
 
-class Person {
-  final String id;
-  final Color color;
-  final String? name;
-
-  List<SelectedItem> items;
-
-  double cost;
-
-  Person(
-      {required this.id,
-      required this.color,
-      this.cost = 0,
-      this.name,
-      List<SelectedItem>? items})
-      : items = items ?? [];
+  SelectorScreenArguments({required this.items});
 }
 
 class SelectorScreen extends StatefulWidget {
@@ -74,6 +56,9 @@ class _SelectorScreenState extends State<SelectorScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as SelectorScreenArguments;
+
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
       theme: const NeumorphicThemeData(
@@ -92,6 +77,16 @@ class _SelectorScreenState extends State<SelectorScreen> {
       child: Scaffold(
         appBar: NeumorphicAppBar(
           title: const Text('Test'),
+          actions: [
+            GestureDetector(
+              onTap: () => Navigator.pushNamed(
+                context,
+                '/final',
+                arguments: FinalScreenArguments(people: people),
+              ),
+              child: Icon(Icons.check),
+            )
+          ],
         ),
         body: NeumorphicBackground(
           // backendColor: Color.fromARGB(255, 209, 209, 209),
@@ -107,32 +102,37 @@ class _SelectorScreenState extends State<SelectorScreen> {
                   people: people,
                   createPerson: createPerson,
                 ),
-                ItemList(
-                  people: people,
-                  selectedPeopleId: selectedCircles,
+
+                SizedBox(
+                  height: 600,
+                  child: ItemList(
+                    people: people,
+                    selectedPeopleId: selectedCircles,
+                    items: args.items,
+                  ),
                 ),
-                NeumorphicButton(
-                    margin: const EdgeInsets.only(top: 10),
-                    style: const NeumorphicStyle(
-                      color: Color.fromARGB(255, 94, 93, 213),
-                    ),
-                    onPressed: () => Navigator.pushNamed(
-                          context,
-                          '/final',
-                          arguments: FinalScreenArguments(people: people),
-                        ),
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 30,
-                      width: 80,
-                      child: const Text(
-                        'Continuar',
-                        style: TextStyle(
-                            color: Colors.white,
-                            //color: NeumorphicColors.background,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ))
+                // NeumorphicButton(
+                //     margin: const EdgeInsets.only(top: 10),
+                //     style: const NeumorphicStyle(
+                //       color: Color.fromARGB(255, 94, 93, 213),
+                //     ),
+                //     onPressed: () => Navigator.pushNamed(
+                //           context,
+                //           '/final',
+                //           arguments: FinalScreenArguments(people: people),
+                //         ),
+                //     child: Container(
+                //       alignment: Alignment.center,
+                //       height: 30,
+                //       width: 80,
+                //       child: const Text(
+                //         'Continuar',
+                //         style: TextStyle(
+                //             color: Colors.white,
+                //             //color: NeumorphicColors.background,
+                //             fontWeight: FontWeight.bold),
+                //       ),
+                //     ))
               ],
             ),
           ),

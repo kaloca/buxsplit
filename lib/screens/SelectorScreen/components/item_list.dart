@@ -1,14 +1,20 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 import './item.dart';
-import '../selector_screen.dart';
+import '../types.dart';
 
 class ItemList extends StatefulWidget {
   final List<Person> people;
   final List<String> selectedPeopleId;
+  var items;
 
-  const ItemList(
-      {Key? key, required this.people, required this.selectedPeopleId})
+  ItemList(
+      {Key? key,
+      required this.people,
+      required this.selectedPeopleId,
+      required this.items})
       : super(key: key);
 
   @override
@@ -16,21 +22,37 @@ class ItemList extends StatefulWidget {
 }
 
 class _ItemListState extends State<ItemList> {
+  final doubleRegex = RegExp(r'\s+(\d+\.\d+)\s+', multiLine: false);
+
   List<Item> items = [];
 
   @override
   void initState() {
     super.initState();
+    print(widget.items);
 
-    items = [
-      Item('Temaki de Salmão', 27, widget.people, widget.selectedPeopleId,
+    items = widget.items["amounts"].map<Item>(
+      (amount) {
+        String name = amount["text"];
+        return Item(
+          name,
+          5,
+          widget.people,
+          widget.selectedPeopleId,
           calculateTotalCosts,
-          quantity: 3),
-      Item('Uramaki', 45, widget.people, widget.selectedPeopleId,
-          calculateTotalCosts),
-      Item('Combinado para uma pessoa', 123, widget.people,
-          widget.selectedPeopleId, calculateTotalCosts)
-    ];
+          quantity: 3,
+        );
+      },
+    ).toList();
+    // items = [
+    //   Item('Temaki de Salmão', 27, widget.people, widget.selectedPeopleId,
+    //       calculateTotalCosts,
+    //       quantity: 3),
+    //   Item('Uramaki', 45, widget.people, widget.selectedPeopleId,
+    //       calculateTotalCosts),
+    //   Item('Combinado para uma pessoa', 123, widget.people,
+    //       widget.selectedPeopleId, calculateTotalCosts)
+    // ];
   }
 
   void calculateTotalCosts() {
@@ -60,17 +82,6 @@ class _ItemListState extends State<ItemList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      children: [
-        ...items,
-        // ElevatedButton(
-        //     onPressed: calculateTotalCosts, child: Text('calculate costs')),
-        // ElevatedButton(
-        //     onPressed: () => widget.people.forEach(
-        //         (p) => print("id" + p.id + "cost : " + p.cost.toString())),
-        //     child: Text('print costs'))
-      ],
-    );
+    return ListView(shrinkWrap: true, children: [...items]);
   }
 }

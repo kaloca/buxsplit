@@ -1,8 +1,6 @@
 import 'package:path/path.dart';
-import 'package:async/async.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 getReceiptFromApi(File imageFile) async {
   // open a bytestream

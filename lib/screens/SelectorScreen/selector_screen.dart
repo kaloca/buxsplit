@@ -11,7 +11,7 @@ import './types.dart';
 class SelectorScreenArguments {
   var items;
 
-  SelectorScreenArguments({required this.items});
+  SelectorScreenArguments({this.items});
 }
 
 class SelectorScreen extends StatefulWidget {
@@ -46,7 +46,7 @@ class _SelectorScreenState extends State<SelectorScreen> {
   }
 
   void createPerson() {
-    if (people.length < 4) {
+    if (people.length < colors.length) {
       people.add(Person(
         id: people.length.toString(),
         color: colors[people.length],
@@ -76,7 +76,7 @@ class _SelectorScreenState extends State<SelectorScreen> {
       ),
       child: Scaffold(
         appBar: NeumorphicAppBar(
-          title: const Text('Test'),
+          title: const Text('Selecionar pratos'),
           actions: [
             GestureDetector(
               onTap: () => Navigator.pushNamed(
@@ -109,6 +109,7 @@ class _SelectorScreenState extends State<SelectorScreen> {
                     people: people,
                     selectedPeopleId: selectedCircles,
                     items: args.items,
+                    index: args.items,
                   ),
                 ),
                 // NeumorphicButton(

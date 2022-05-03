@@ -1,7 +1,7 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import './screens/InitialScreen/initial_screen.dart';
-import './screens/ScanScreen/scan_screen.dart';
+import './screens/ScanScreen/scan_screen_demo.dart';
 import './screens/SelectorScreen/selector_screen.dart';
 import './screens/FinalScreen/final.screen.dart';
 

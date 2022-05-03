@@ -50,12 +50,18 @@ class _PeopleIndicatorState extends State<PeopleIndicator> {
                         //alignment: Alignment.center,
                         margin: const EdgeInsets.only(right: 8, top: 5),
                         child: widget.people.isEmpty
-                            ? const Text(
-                                'Adicionar pessoas',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: NeumorphicColors.darkVariant,
-                                  fontWeight: FontWeight.w600,
+                            ? GestureDetector(
+                                onTap: () {
+                                  widget.createPerson();
+                                  setState(() {});
+                                },
+                                child: const Text(
+                                  'Adicionar pessoas',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: NeumorphicColors.darkVariant,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               )
                             : null),

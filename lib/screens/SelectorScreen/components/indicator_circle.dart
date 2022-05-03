@@ -1,5 +1,7 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
+List<String> alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+
 class IndicatorCircle extends StatefulWidget {
   final Color circleColor;
   final String id;
@@ -54,13 +56,12 @@ class _IndicatorCircleState extends State<IndicatorCircle> {
                 height: 30,
                 width: 30,
                 alignment: Alignment.center,
-                // child: isSelected
-                //     ? const Icon(
-                //         Icons.done,
-                //         size: 20,
-                //         color: NeumorphicColors.background,
-                //       )
-                //     : null,
+                child: Text(alphabet[int.parse(widget.id)],
+                    style: const TextStyle(
+                      color: NeumorphicColors.background,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
+                    )),
               ),
             ),
             Container(

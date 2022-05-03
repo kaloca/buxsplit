@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SelectedItem {
   final String name;
   final double price;
-  final int quantity;
+  final double quantity;
 
   const SelectedItem(this.name, this.price, this.quantity);
 }

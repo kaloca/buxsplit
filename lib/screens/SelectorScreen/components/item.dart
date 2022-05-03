@@ -10,7 +10,7 @@ class Item extends StatefulWidget {
   final List<Person> people;
   final List<String> selectedPeopleId;
   final Function executeWhenTapped;
-  final int quantity;
+  final double quantity;
 
   List<Person> indicatorCircles = [];
 
@@ -122,7 +122,7 @@ class _ItemState extends State<Item> {
                     margin: const EdgeInsets.only(right: 6, left: 8),
                     width: 18,
                     child: Text(
-                      "${widget.quantity.toString()}x",
+                      "${widget.quantity.toInt().toString()}x",
                     ),
                   ),
                 ],

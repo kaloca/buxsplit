@@ -17,6 +17,8 @@ class FinalScreen extends StatefulWidget {
 }
 
 class _FinalScreenState extends State<FinalScreen> {
+  double _tipAmount = 10;
+
   @override
   Widget build(BuildContext context) {
     final args =
@@ -45,9 +47,34 @@ class _FinalScreenState extends State<FinalScreen> {
           child: Container(
             // color: Colors.blue,
             padding: const EdgeInsets.all(15),
-            child: ListView(
-                children:
-                    args.people.map((person) => TotalCost(person)).toList()),
+            child: ListView(children: [
+              Container(
+                margin: const EdgeInsets.only(left: 10, bottom: 10),
+                child: Text(
+                  'Gorjeta: ${_tipAmount.round()}%',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                      color: Colors.grey[700]),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 30),
+                child: NeumorphicSlider(
+                  // thumb: Container(width: 40, height: 40, color: Colors.red),
+                  min: 0,
+                  max: 20,
+                  height: 20,
+                  value: _tipAmount,
+                  onChanged: (value) => setState(() {
+                    _tipAmount = value.roundToDouble();
+                  }),
+                ),
+              ),
+              ...args.people
+                  .map((person) => TotalCost(person, _tipAmount))
+                  .toList()
+            ]),
           ),
         ),
       ),

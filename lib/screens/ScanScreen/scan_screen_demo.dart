@@ -80,13 +80,29 @@ class _ScanScreenState extends State<ScanScreen> {
                               imagePaths[_image],
                               height: 300,
                             )
-                          : const SizedBox(
+                          : SizedBox(
                               width: 300,
                               height: 300,
-                              child: Icon(
-                                Icons.image,
-                                size: 70,
-                                color: Color.fromARGB(255, 94, 93, 213),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.image,
+                                    size: 70,
+                                    color: Color.fromARGB(255, 94, 93, 213),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 10),
+                                    child: const Text(
+                                      'Selecionar',
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 94, 93, 213),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
                     ),

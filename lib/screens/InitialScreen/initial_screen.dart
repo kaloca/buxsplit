@@ -16,6 +16,15 @@ class _InitialScreenState extends State<InitialScreen> {
       body: Stack(
         children: [
           Opacity(
+              opacity: 0.9,
+              child: Container(
+                margin: const EdgeInsets.only(left: 200, top: 60),
+                child: Image.asset(
+                  'assets/images/demo.png',
+                  width: 200,
+                ),
+              )),
+          Opacity(
             opacity: 0.3,
             child: Container(
               margin: const EdgeInsets.only(top: 470),

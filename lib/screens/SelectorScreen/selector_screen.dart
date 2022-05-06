@@ -22,7 +22,7 @@ class SelectorScreen extends StatefulWidget {
 }
 
 class _SelectorScreenState extends State<SelectorScreen> {
-  List<String> selectedCircles = [];
+  List<String> selectedCircles = ['d'];
   List<Person> people = [];
 
   List<Color> colors = [
@@ -33,15 +33,21 @@ class _SelectorScreenState extends State<SelectorScreen> {
     Colors.pinkAccent,
     Colors.indigo,
     Colors.teal,
+    const Color.fromARGB(255, 94, 93, 213)
   ];
 
   void selectCircle(String id) {
+    // setState(() {
+    //   if (selectedCircles.contains(id)) {
+    //     selectedCircles.remove(id);
+    //   } else {
+    //     selectedCircles.add(id);
+    //   }
+    // });
+    print(selectedCircles);
     setState(() {
-      if (selectedCircles.contains(id)) {
-        selectedCircles.remove(id);
-      } else {
-        selectedCircles.add(id);
-      }
+      selectedCircles[0] = id;
+      // selectedCircles.add(id);
     });
   }
 
@@ -51,6 +57,12 @@ class _SelectorScreenState extends State<SelectorScreen> {
         id: people.length.toString(),
         color: colors[people.length],
       ));
+    }
+  }
+
+  void removePerson() {
+    if (people.isNotEmpty) {
+      people.remove(people.last);
     }
   }
 
@@ -84,7 +96,7 @@ class _SelectorScreenState extends State<SelectorScreen> {
                 '/final',
                 arguments: FinalScreenArguments(people: people),
               ),
-              child: Icon(Icons.check),
+              child: const Icon(Icons.check),
             )
           ],
         ),
@@ -101,6 +113,7 @@ class _SelectorScreenState extends State<SelectorScreen> {
                   selectCircle: selectCircle,
                   people: people,
                   createPerson: createPerson,
+                  removePerson: removePerson,
                 ),
 
                 SizedBox(

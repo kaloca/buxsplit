@@ -9,19 +9,25 @@ class IndicatorCircle extends StatefulWidget {
   final bool isPartOfItem;
   final double price;
   final bool isInFinalScreen;
+  final int value;
+  final int groupValue;
 
   const IndicatorCircle(
       this.circleColor, this.id, this.selectCircle, this.isPartOfItem,
-      {Key? key, this.price = 0, this.isInFinalScreen = false})
+      {Key? key,
+      this.price = 0,
+      this.isInFinalScreen = false,
+      required this.value,
+      required this.groupValue})
       : super(key: key);
+
+  bool get isSelected => value == groupValue;
 
   @override
   State<IndicatorCircle> createState() => _IndicatorCircleState();
 }
 
 class _IndicatorCircleState extends State<IndicatorCircle> {
-  bool isSelected = false;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -30,8 +36,14 @@ class _IndicatorCircleState extends State<IndicatorCircle> {
                 if (widget.isPartOfItem) {
                   widget.selectCircle(widget.id);
                 } else {
-                  isSelected = !isSelected;
-                  widget.selectCircle(widget.id);
+                  // isSelected = !isSelected;
+                  if (widget.value == widget.groupValue) {
+                    //unselect
+                    // widget.selectCircle(100);
+                  } else {
+                    widget.selectCircle(widget.value);
+                  }
+                  widget.selectCircle(widget.value);
                 }
               }
             : null,
@@ -39,11 +51,11 @@ class _IndicatorCircleState extends State<IndicatorCircle> {
           children: [
             Neumorphic(
               style: NeumorphicStyle(
-                color: !isSelected
+                color: !widget.isSelected
                     ? widget.circleColor
                     : widget.circleColor.withOpacity(0.5),
                 boxShape: const NeumorphicBoxShape.circle(),
-                depth: isSelected ? -3.5 : 3,
+                depth: widget.isSelected ? -3.5 : 3,
                 intensity: 1,
                 // border: NeumorphicBorder(
                 //   color: Color.fromARGB(255, 16, 0, 118),
@@ -51,7 +63,12 @@ class _IndicatorCircleState extends State<IndicatorCircle> {
                 //   width: 0.3,
                 // ),
               ),
-              margin: const EdgeInsets.only(right: 10),
+              margin: EdgeInsets.only(
+                  right: !widget.isInFinalScreen &&
+                          !widget.isPartOfItem &&
+                          widget.id == '7'
+                      ? 0
+                      : 10),
               child: Container(
                 height: 30,
                 width: 30,

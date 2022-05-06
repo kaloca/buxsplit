@@ -42,6 +42,8 @@ class _TotalCostState extends State<TotalCost> {
                     () {},
                     true,
                     isInFinalScreen: true,
+                    value: 1,
+                    groupValue: 2,
                   ),
                   Text(
                     toReais.format(widget.person.cost * (1 + widget.tip / 100)),

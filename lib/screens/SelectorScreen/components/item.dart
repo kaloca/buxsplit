@@ -56,8 +56,9 @@ class _ItemState extends State<Item> {
             (person) => Person(id: person.id, color: person.color, cost: 0));
 
         List<Person> _selectedPeople = List.from(peopleCopy
-            .where((person) => widget.selectedPeopleId.contains(person.id))
+            .where((person) => person.id == widget.selectedPeopleId.last)
             .toList());
+        print(_selectedPeople);
 
         List<Person> peopleToAdd = [];
 
@@ -136,8 +137,14 @@ class _ItemState extends State<Item> {
                   scrollDirection: Axis.horizontal,
                   children: widget.indicatorCircles
                       .map((person) => IndicatorCircle(
-                          person.color, person.id, removeCircle, true,
-                          price: person.cost))
+                            person.color,
+                            person.id,
+                            removeCircle,
+                            true,
+                            price: person.cost,
+                            value: 1,
+                            groupValue: 4,
+                          ))
                       .toList(),
                 ),
               ),

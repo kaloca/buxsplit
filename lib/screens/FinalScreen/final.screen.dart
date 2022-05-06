@@ -42,6 +42,15 @@ class _FinalScreenState extends State<FinalScreen> {
       child: Scaffold(
         appBar: NeumorphicAppBar(
           title: const Text('Total'),
+          actions: [
+            GestureDetector(
+              child: const Icon(Icons.home),
+              onTap: () => Navigator.pushNamed(
+                context,
+                '/',
+              ),
+            )
+          ],
         ),
         body: NeumorphicBackground(
           child: Container(

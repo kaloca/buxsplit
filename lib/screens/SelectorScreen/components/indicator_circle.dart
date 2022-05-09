@@ -30,7 +30,7 @@ class IndicatorCircle extends StatefulWidget {
 class _IndicatorCircleState extends State<IndicatorCircle> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
         onTap: !widget.isInFinalScreen
             ? () {
                 if (widget.isPartOfItem) {

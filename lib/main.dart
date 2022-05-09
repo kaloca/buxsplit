@@ -20,7 +20,7 @@ NeumorphicApp myApp = NeumorphicApp(
   routes: {
     '/': (context) => const InitialScreen(),
     '/scan': (context) => const ScanScreen(),
-    '/selector': (context) => const SelectorScreen(),
+    '/selector': (context) => SelectorScreen(),
     '/final': (context) => const FinalScreen(),
   },
 );

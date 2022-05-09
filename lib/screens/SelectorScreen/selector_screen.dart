@@ -4,7 +4,7 @@ import 'package:buxsplit/screens/FinalScreen/final.screen.dart';
 
 import 'components/people_indicator.dart';
 import 'components/item_list.dart';
-import 'components/new_person_creator.dart';
+import 'components/item.dart';
 
 import './types.dart';
 
@@ -15,7 +15,9 @@ class SelectorScreenArguments {
 }
 
 class SelectorScreen extends StatefulWidget {
-  const SelectorScreen({Key? key}) : super(key: key);
+  static final GlobalKey<_SelectorScreenState> globalKey = GlobalKey();
+
+  SelectorScreen({Key? key}) : super(key: globalKey);
 
   @override
   State<SelectorScreen> createState() => _SelectorScreenState();
@@ -24,6 +26,8 @@ class SelectorScreen extends StatefulWidget {
 class _SelectorScreenState extends State<SelectorScreen> {
   List<String> selectedCircles = ['d'];
   List<Person> people = [];
+
+  bool showDeleteError = false;
 
   List<Color> colors = [
     Colors.blueGrey,
@@ -44,7 +48,6 @@ class _SelectorScreenState extends State<SelectorScreen> {
     //     selectedCircles.add(id);
     //   }
     // });
-    print(selectedCircles);
     setState(() {
       selectedCircles[0] = id;
       // selectedCircles.add(id);
@@ -60,9 +63,30 @@ class _SelectorScreenState extends State<SelectorScreen> {
     }
   }
 
+  bool checkFU() {
+    if (ItemList.globalKey.currentState != null &&
+        ItemList.globalKey.currentState!.checkIfEmpty(people.last.id)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   void removePerson() {
     if (people.isNotEmpty) {
-      people.remove(people.last);
+      // ItemList.globalKey.currentState
+      //     ?.removeCircleFromItems("${int.parse(people.last.id) + 1}");
+      if (checkFU()) {
+        people.remove(people.last);
+      } else {
+        setState(() => showDeleteError = true);
+      }
+    }
+  }
+
+  void deletePersonToDelete() {
+    if (checkFU()) {
+      setState(() => showDeleteError = false);
     }
   }
 
@@ -90,7 +114,7 @@ class _SelectorScreenState extends State<SelectorScreen> {
         appBar: NeumorphicAppBar(
           title: const Text('Selecionar pratos'),
           actions: [
-            GestureDetector(
+            InkWell(
               onTap: () => Navigator.pushNamed(
                 context,
                 '/final',
@@ -115,9 +139,25 @@ class _SelectorScreenState extends State<SelectorScreen> {
                   createPerson: createPerson,
                   removePerson: removePerson,
                 ),
+                SizedBox(
+                    child: showDeleteError
+                        ? Container(
+                            margin: const EdgeInsets.only(bottom: 13),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: const Text(
+                              'Por favor desselecionar os items com a pessoa que está tentando deletar',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(255, 144, 39, 32),
+                              ),
+                            ),
+                          )
+                        : null),
 
                 SizedBox(
-                  height: 600,
+                  height: showDeleteError ? 560 : 600,
                   child: ItemList(
                     people: people,
                     selectedPeopleId: selectedCircles,

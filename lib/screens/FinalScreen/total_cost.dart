@@ -50,7 +50,7 @@ class _TotalCostState extends State<TotalCost> {
                     style: const TextStyle(
                         fontSize: 19, fontWeight: FontWeight.w400),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       setState(() {
                         iconDepth = !showItems ? 0.7 : 3.5;

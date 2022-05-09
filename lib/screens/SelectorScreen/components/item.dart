@@ -1,3 +1,4 @@
+import 'package:buxsplit/screens/SelectorScreen/selector_screen.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import 'package:buxsplit/screens/SelectorScreen/components/indicator_circle.dart';
@@ -14,20 +15,16 @@ class Item extends StatefulWidget {
 
   List<Person> indicatorCircles = [];
 
-  List<Person> returnSelectedPeople() {
-    return (indicatorCircles);
-  }
-
   Item(this.name, this.price, this.people, this.selectedPeopleId,
       this.executeWhenTapped,
       {Key? key, this.quantity = 1})
       : super(key: key);
 
   @override
-  State<Item> createState() => _ItemState();
+  State<Item> createState() => ItemState();
 }
 
-class _ItemState extends State<Item> {
+class ItemState extends State<Item> {
   void updatePricesPerItem() {
     for (var circle in widget.indicatorCircles) {
       double currentCost =
@@ -44,12 +41,15 @@ class _ItemState extends State<Item> {
       widget.indicatorCircles.removeWhere((circle) => circle.id == id);
       updatePricesPerItem();
       widget.executeWhenTapped();
+      if (id == widget.people.last.id) {
+        SelectorScreen.globalKey.currentState?.deletePersonToDelete();
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       // customBorder: ShapeBorder.,
       onTap: () {
         var peopleCopy = widget.people.map(
@@ -58,7 +58,6 @@ class _ItemState extends State<Item> {
         List<Person> _selectedPeople = List.from(peopleCopy
             .where((person) => person.id == widget.selectedPeopleId.last)
             .toList());
-        print(_selectedPeople);
 
         List<Person> peopleToAdd = [];
 
